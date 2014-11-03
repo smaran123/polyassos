@@ -1,0 +1,32 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h2>Task Details</h2>
+    <div class="row-fluid">
+      <div class="span6">
+
+        <div class="row-fluid">
+          <div class="span4">Task Name :</div>
+          <div class="span4"><%= @task.name %></div>
+        </div>
+        <div class="row-fluid">
+          <div class="span4">TaskDescription:</div>
+          <div class="span4"><%= @task.description %></div>
+        </div>
+
+
+        <div class="row-fluid">
+          <div class="span4">CompltedDate:</div>
+          <div class="span4"><%= @task.completiondate.strftime("%B %d, %Y") %></div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span4">Comment:</div>
+          <div class="span4"><%=  @task.comment%></div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Back', tasks_path %>

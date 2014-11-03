@@ -1,0 +1,15 @@
+<p>
+  <strong>Name:</strong>
+  <%= @property.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @property.place %>
+</p>
+
+
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>
+
+<%= link_to "PropertyComment", property_comments_path(@property) %>

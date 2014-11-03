@@ -1,0 +1,32 @@
+
+<h1>Listing Events</h1>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+
+    <th>Time</th>
+
+ 
+    <th>action</th>
+  </tr>
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= event.name %></td>
+   
+      <td><%= event.event_time.strftime('%H:%M:%S')%></td>
+     
+           
+      <td><%= link_to 'Show', event_path(event),:class=> "btn btn" %>
+        <%= link_to 'Edit', edit_event_path(event),:class=>"btn btn-success" %>
+        <%= link_to 'Destroy' , event, :method => :delete,:data=>{:confirm => 'are you sure?'}, :class=>"btn btn-danger" %>
+      </td>
+ 
+    </tr>
+    
+  <% end %>
+
+</table>
+
+
+
+<%= link_to 'New Event', new_event_path %>

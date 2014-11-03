@@ -1,0 +1,40 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h2>Worker Details</h2>
+
+    <div class="row-fluid">
+      <div class="span6">
+
+        <div class="row-fluid">
+          <div class="span4">Worker Name :</div>
+          <div class="span4"><%= @worker.name %></div>
+        </div>
+        <div class="row-fluid">
+          <div class="span4">Email:</div>
+          <div class="span4"><%= @worker.email %></div>
+        </div>
+
+
+        <div class="row-fluid">
+          <div class="span4">PhoneNo:</div>
+          <div class="span4"><%= @worker.phoneno %></div>
+        </div>
+
+
+        <div class="row-fluid">
+          <div class="span4">Hiredon:</div>
+          <div class="span4"><%=  @worker.hiredon.strftime("%B %d, %Y")%></div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span4">Designation:</div>
+          <div class="span4"><%=  @worker.designation%></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Back', workers_path %>
+
+

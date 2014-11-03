@@ -1,0 +1,56 @@
+<div style="float:right;">
+   <% if current_worker.manager == false %>
+  <i class="icon-normal-plus"><%= link_to "AddNew", new_worker_sitevisit_path(@worker) %></i>
+  <% end %>
+</div>
+
+
+<legend>
+  <center> SiteVisit Details </center>
+</legend>
+
+
+<table class="table table-striped">
+  <tr>
+  
+    <th>LeadName</th>
+    
+    <th>PropertyName</th>
+    
+    <th>InspectionDate</th>
+    <th>Comment</th>
+    
+   
+    <th>Actions</th>
+  </tr>
+</tr>
+<% @site_visits.each do |site_visit |  %>
+  <tr>
+     <td><%= site_visit.lead.present? ? site_visit.lead.name : "" %> </td>
+    
+       <td><%= site_visit.property.present? ? site_visit.property.title : "" %> </td>
+     
+     <td><% if site_visit.inspectiondate.present? %><%=  site_visit.inspectiondate.strftime("%B %d, %Y") %><% end %> </td>
+ 
+   
+        
+        <td>  
+        <% site_visit.worker_comments.each do |c| %>
+        <%= c.comment %>
+        <%end%>
+      </td>
+      
+  
+    <td>
+      
+      <%= link_to  "Show",  worker_sitevisit_path(@worker,site_visit),  :class=>"btn btn-success"%> 
+       <% if current_worker.manager == false  %>
+      <%= link_to "Edit",  edit_worker_sitevisit_path(@worker,site_visit), :class=>"btn btn-info" %> 
+      
+      <%= link_to "Delete", worker_sitevisit_path(@worker,site_visit),:method=>:delete,:data=>{:confirm=>"are you sure?"},:class=>"btn btn-danger"%>
+   <% end %>
+    </td>
+  </tr>
+<% end %>
+
+</table>

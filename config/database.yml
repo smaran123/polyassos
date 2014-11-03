@@ -1,0 +1,9 @@
+
+
+development:
+  adapter: mysql2
+  database: polyassos_development
+  username: root
+  password: root
+  pool: 5
+  timeout: 5000

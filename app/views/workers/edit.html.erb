@@ -1,0 +1,5 @@
+<h1>Edit worker</h1>
+<%= form_for @worker, :url => worker_path(), :method => "PUT" do |f|%>
+<%= render :partial => "form", :locals => { :f => f} %>
+<%end%>
+<%=link_to "Back", workers_path%>

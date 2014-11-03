@@ -1,0 +1,56 @@
+<div style="float:right;">
+  <% if current_worker.manager == true  %>
+    <i class="icon-normal-plus"><%= link_to "AddNewworker",new_worker_path %></i>
+  <%end%>
+</div>
+
+<legend>
+  <center> Workers Details </center>
+</legend>
+<table class = "table table-striped">
+  <tr>
+    <th>SNo</th>
+    <th>Name</th>
+    <th>Leads</th>
+    <th>SiteVisit</th>
+    <th></th>
+
+  </tr>
+  <% @workers.each_with_index do |worker,index|%>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= link_to worker.name, worker_path(worker)  %></td>
+    
+      <td><%=link_to worker.leads.count, (worker_leads_path(worker) if current_worker.manager == true) %></td>
+<td><%=link_to worker.site_visits.count, (worker_sitevisits_path(worker)  if current_worker.manager == true)%></td>
+
+
+      <td>
+        <%=link_to "show", worker_path(worker),:class=>"btn btn-success"%>
+        <% if current_worker.manager == true  %>
+          <%=link_to "edit", edit_worker_path(worker),:class=>"btn btn-info"%>
+          <%=link_to "delete", worker_path(worker),:method=>:delete,:data=>{:confirm=>"are you sure?"},:class=>"btn btn-danger"%>
+          <%if worker.is_active == false %>
+            <%= link_to "UnBlock", update_unblock_worker_path(worker),:method=>:put,:data=>{:confirm=>"are you sure"}, :class => "btn btn-warning" %>
+          <%else%>
+            <%= link_to "Block", update_block_worker_path(worker),:method=>:put,:data=>{:confirm=>"are you sure"}, :class => "btn btn-inverse" %>
+          <%end%>
+
+        <% end %>
+      </td>
+    </tr>
+  <%end%>
+</table>
+
+
+
+<div class="project-type">
+  <div class="text-label">
+    <h2> All    Properties:
+      <%= link_to Property.count,properties_path %> </h2>
+
+    <h2>  SalePropertites:
+      <%= link_to  Property.where("property_listing = ?", 'Sale').count,sale_admin_properties_path %> 
+    </h2>
+  </div>
+</div>

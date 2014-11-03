@@ -1,0 +1,52 @@
+
+  <% if @worker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@worker.errors.count, "error") %> prohibited this manager from being saved:</h2>
+      <ul>
+        <% @worker.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+  <div class="field">
+    <%=f.label :email%>
+    <%=f.text_field :email%>
+  </div>
+
+
+  <div class="field">
+    <%=f.label :hiredon%>
+    <%= f.text_field :hiredon, :id => "date" %>
+  </div>
+
+  <div class="field">
+    <%=f.label :Designation%>
+    <%=f.text_field :designation%>
+  </div>
+
+  <div class="actions">
+    <%=f.submit%>
+  </div>
+
+
+
+
+
+
+<script>
+  $(function() {
+    $("#date").datepicker(
+            {
+              format: "yyyy-mm-dd",
+              todayHighlight: true,
+              todayBtn: 'linked',
+              autoclose: true
+            });
+  });
+</script>
+

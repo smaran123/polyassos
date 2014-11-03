@@ -1,0 +1,5 @@
+<h1>Edit Lead</h1>
+<%= nested_form_for @lead, :url=>  worker_lead_path(@worker,@lead),  :method => "PUT" do |f| %>
+
+<p><%= render :partial => "form", :locals => {:f => f}%> </p>
+<%end%>

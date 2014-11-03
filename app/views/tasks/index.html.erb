@@ -1,0 +1,59 @@
+<div style="float:right;">
+  <% if current_worker.manager == true  %>
+    <i class="icon-normal-plus"><%= link_to "AddNewTask",new_task_path %></i>
+  <%end%>
+</div>
+<legend>
+  <center> Task Details </center>
+</legend>
+<table class = "table table-striped">
+  <tr>
+      <th>SNo</th>
+    <th>TaskName</th>
+    <th>Description</th>
+
+    <th>ComletedDate</th>
+    <th>Task Status</th>
+    <th> Comment</th>
+    <th>AssignedTo</th>
+    <th>Actions</th>
+  </tr>
+  <% @tasks.each_with_index do |task,index|%>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%=task.name%></td>
+      <td><%=task.description%></td>
+
+      <td><%if task.completiondate.present? %> <%=task.completiondate.strftime("%B %d, %Y")%><%end%></td>
+      <td> <%=task.status%> </td>
+      
+      <td>
+<%task.worker_comments.each do |tc|%>
+        <%=tc.comment%>
+        <%end%>
+      </td>
+      
+      
+   
+
+      
+      <td>
+        <% if task.worker.present? %>
+          <%=task.worker.name %>
+        <%end%>
+      </td>
+
+      <td>
+        <%=link_to "show", task_path(task),   :class=>"btn btn-success" %>
+      <% if current_worker.manager == true  %>
+          <%=link_to "edit", edit_task_path(task),:class=>"btn btn-info"%>
+          <%=link_to "delete", task_path(task),:method=>:delete,:data=>{:confirm=>"are you sure?"},:class=>"btn btn-danger"%>
+        <%end%>
+      </td>
+    </tr>
+  <%end%>
+</table>
+
+
+
+

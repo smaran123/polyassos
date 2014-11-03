@@ -1,0 +1,40 @@
+
+<h1>Listing properties</h1>
+<table class = "table table-striped">
+  <tr>
+    <th>Name</th>
+
+    <th>Place</th>
+
+ 
+    <th>action</th>
+  </tr>
+  <% @properties.each do |property| %>
+    <tr>
+      <td><%= property.name %></td>
+   
+      <td><%= property.place %></td>
+     
+      
+     
+      
+      
+      
+      
+      <td><%= link_to 'Show', property_path(property),:class=> "btn btn" %>
+        <%= link_to 'Edit', edit_property_path(property),:class=>"btn btn-success" %>
+        <%= link_to 'Destroy' , property, :method => :delete,:data=>{:confirm => 'are you sure?'}, :class=>"btn btn-danger" %>
+      </td>
+ 
+    </tr>
+    
+  <% end %>
+
+</table>
+
+
+
+<%= link_to 'New Product', new_property_path %>
+
+
+

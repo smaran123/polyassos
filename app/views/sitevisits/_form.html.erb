@@ -1,0 +1,73 @@
+
+  <%#= f.error_messages %>
+  <% if @site_visit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@site_visit.errors.count, "error") %> prohibited this site visitor from being saved:</h2>
+      <ul>
+        <% @site_visit.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%#*<div class="field">%>
+    <%#=f.label :Name%>
+    <%#=f.text_field :visitor_name%>
+  <%#*</div>%>
+
+
+ <div class="field">
+    <%= f.label :LeadName %>  
+         <%= f.select :lead_id, options_for_select([["Select",""]]+Lead.all.where(:worker_id => current_worker.id).map{|a| [a.name,a.id]},:selected=>f.object.lead_id) %>
+  </div>
+
+
+ <div class="field">
+    <%= f.label :PropertyName %>  
+   
+      <%= f.select :property_id, options_for_select([["Select",""]]+Property.all.map{|a| [a.title,a.id]},:selected=>f.object.property_id) %>
+
+  </div>
+
+
+  <div class="field">
+    <%=f.label :inspectiondate%>
+    <%= f.text_field :inspectiondate, :id => "date" %>
+  </div>
+
+
+
+ 
+ 
+  <div class="control-group">
+     <label>site visit Comments</label>
+<%= f.fields_for :worker_comments do |comm| %>
+ <%= comm.label :Comment %>
+  <%= comm.text_area :comment %>
+  <%= comm.link_to_remove image_tag("remove.png") %>
+<% end %>
+<p><%= f.link_to_add image_tag("add.jpeg"), :worker_comments %></p>
+  </div>
+
+
+
+
+  <div class="actions">
+    <%=f.submit%>
+  </div>
+
+
+
+<script>
+  $(function() {
+    $("#date").datepicker(
+            {
+              format: "yyyy-mm-dd",
+              todayHighlight: true,
+              todayBtn: 'linked',
+              autoclose: true
+            });
+  });
+</script>
+
+

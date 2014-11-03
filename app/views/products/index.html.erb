@@ -1,0 +1,43 @@
+
+<h1>Listing products</h1>
+<table class="table table-stripped">
+  <tr>
+    <th>Name</th>
+
+    <th>Price</th>
+
+ 
+    <th>action</th>
+  </tr>
+  <% @products.each do |product| %>
+    <tr>
+      <td><%= product.name %></td>
+   
+      <td><%= product.price %></td>
+     
+      
+     
+      
+      
+      
+      
+      <td><%= link_to 'Show', product_path(product),:class=> "btn btn" %>
+        <%= link_to 'Edit', edit_product_path(product),:class=>"btn btn-success" %>
+        <%= link_to 'Destroy' , product, :method => :delete,:data=>{:confirm => 'are you sure?'}, :class=>"btn btn-danger" %>
+      </td>
+ 
+    </tr>
+    
+  <% end %>
+
+</table>
+
+
+
+<%= link_to 'New Product', new_product_path %>
+
+
+
+
+<%#= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_new_order_path %>
+

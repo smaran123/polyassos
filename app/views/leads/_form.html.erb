@@ -1,0 +1,59 @@
+
+  <% if @lead.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lead.errors.count, "error") %> prohibited this lead from being saved:</h2>
+      <ul>
+        <% @lead.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%=f.label :name%>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%=f.label :phone %>
+    <%=f.text_field :phone %>
+  </div>
+
+
+  <div class="field">
+    <%=f.label :email%>
+    <%=f.text_field :email%>
+  </div>
+
+
+
+  <div class="control-group">
+     <label>lead Comments</label>
+<%= f.fields_for :worker_comments do |comm| %>
+ <%= comm.label :Comment %>
+  <%= comm.text_area :comment %>
+  <%= comm.link_to_remove image_tag("remove.png") %>
+<% end %>
+<p><%= f.link_to_add image_tag("add.jpeg"), :worker_comments %></p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="actions">
+    <%=f.submit%>
+  </div>
+
+
+
+
+
+

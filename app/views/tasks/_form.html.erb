@@ -1,0 +1,78 @@
+<%= nested_form_for @task do |f| %>
+  <%#= f.error_messages %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%=f.label :TaskName%>
+    <%=f.text_field :name%>
+  </div>
+
+  <div class="field">
+    <%=f.label :Description%>
+    <%=f.text_area :description%>
+  </div>
+
+
+
+  <div class="field">
+    <%=f.label :CompletedDate%>
+    <%= f.text_field :completiondate, :id => "date" %>
+  </div>
+
+  <div class="control-group">
+    <%=f.label:status,:class=>'control-label'%>
+    <div class="controls">
+      <%=f.select :status, options_for_select([['close','close'],['open','open']], :selected => f.object.status)%>
+    </div>
+  </div>
+
+  <%#*<div class="field">%>
+    <%#=f.label :comment%>
+    <%#=f.text_area :comment%>
+  <%#*</div>%>
+
+  <div class="control-group">
+     <label>Task Comments</label>
+<%= f.fields_for :worker_comments do |comm| %>
+ <%= comm.label :Comment %>
+  <%= comm.text_area :comment %>
+  <%= comm.link_to_remove image_tag("remove.png") %>
+<% end %>
+<p><%= f.link_to_add image_tag("add.jpeg"), :worker_comments %></p>
+  </div>
+
+
+
+
+
+
+  <div class="field">
+    <%=f.label :Assignto%>
+    <%=f.select :worker_id,options_for_select([["Select", ""]] + Worker.where(:manager=>"false").map{|i| [i.name,i.id]})%>
+  </div>
+
+  <div class="actions">
+    <%=f.submit%>
+  </div>
+
+<%end%>
+
+<script>
+  $(function() {
+    $("#date").datepicker(
+            {
+              format: "yyyy-mm-dd",
+              todayHighlight: true,
+              todayBtn: 'linked',
+              autoclose: true
+            });
+  });
+</script>

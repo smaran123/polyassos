@@ -1,0 +1,57 @@
+<div style="float:right;">
+<% if current_worker.manager == false  %>
+    <i class="icon-normal-plus"><%= link_to "AddNewLead",new_worker_lead_path(@worker) %></i>
+<%end%>
+</div>
+
+
+<legend>
+  <center> leads Details </center>
+</legend>
+
+
+<table class = "table table-striped">
+  <tr>
+    <th>Si No</th>
+    <th>Name</th>
+    <th>PhoneNo</th>
+
+    <th>Email</th>
+    <th>Property Status</th>
+    <th>Actions</th>
+  </tr>
+  <% @leads.each_with_index do |lead,index|%>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%=lead.name%></td>
+      <td><%=lead.phone%></td>
+      <td><%=lead.email%></td>
+
+      
+      
+        <td>  
+        <% lead.worker_comments.each do |c| %>
+        <%= c.comment %>
+        <%end%>
+      </td>
+      
+      
+      
+      
+      <td>
+        <%=link_to "show", worker_lead_path(@worker, lead),:class=>"btn btn-success"%>
+        <% if current_worker.manager == false  %>
+        <%=link_to "edit", edit_worker_lead_path(@worker,lead),:class=>"btn btn-info"%>
+        <%=link_to "delete", worker_lead_path(@worker, lead),:method=>:delete,:data=>{:confirm=>"are you sure?"},:class=>"btn btn-danger"%>
+        <%end%>
+      </td>
+    </tr>
+
+  <%end%>
+
+</table>
+
+
+
+
+

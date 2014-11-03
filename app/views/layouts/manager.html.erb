@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "EZYPROPS" %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "application", "simple-sidebar",:media => "all" %>
+    <%= javascript_include_tag "application", "nested_form"%>
+  </head>
+  <body>
+    <div class="navbar navbar-fluid-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+
+
+
+          <a class="brand" href="#">EZYPROPS</a>
+
+          <% if current_worker  %>
+            <ul class="nav pull-right">
+              <%=link_to "Logout", destroy_worker_session_path, :method=>:delete %>
+            </ul>
+          <%else %>
+            <%= link_to "Sign in ", new_worker_session_path,:class=>"brand" %>
+          <%end%>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div id="sidebar-wrapper"  style="top:43px;position: absolute;">
+            <ul class="nav nav-pills nav-stacked">
+
+
+
+              <%if  current_worker.manager == true%>
+                <li class="<%=  params[:controller] == "workers" && params[:action] == "index" && params[:action] == "new" ? "active" : ""%>"><%= link_to "workers", workers_path%>
+                </li>
+              <%end%>
+              <%if current_worker%>
+                <li class="<%=  params[:controller] == "tasks" || params[:action] == "index" && params[:action] == "new" ? "active" : ""%>"><%= link_to "AssignTasks", tasks_path %>
+                </li>
+               
+                  <li class="<%=  params[:controller] == "manage_clients" || params[:action] == "index" && params[:action] == "new" ? "active" : ""%>"><%= link_to "sale", manage_clients_path %>
+              </li> 
+              <%end%>
+                 
+              <% if current_worker and current_worker.manager == false %>
+
+                <li class="<%=  params[:controller] == "managetasks" && params[:action] == "index" ? "active" : ""%>"><%= link_to "ManageTasks",managetasks_path%>
+                </li>
+                
+                <li class="<%= params[:controller] == "profiles" && params[:action] == "index" ? "active" : ""%>"><%= link_to "ProfileManagement", profiles_path%>
+                </li>
+
+               <li class="<%= params[:controller] == "sitevisits" && params[:action] == "index" ? "active" : ""%>"><%= link_to "sitevisit", worker_sitevisits_path(current_worker)%>
+                </li>   
+
+              <%end%> 
+
+
+
+            </ul>
+          </div>
+        </div><!--/span-->
+        <div class="span9">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+      </div><!--/row-->
+    </div> <!-- /container -->
+
+  </body>
+</html>
+<style>
+  .row-fluid .span3 {
+    width: 17.077%;
+  }
+</style>

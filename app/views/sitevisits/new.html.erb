@@ -1,0 +1,4 @@
+<h1>NewSitevisits</h1>
+<%= nested_form_for @site_visit, :url => worker_sitevisits_path(@worker), :method => "POST" do |f| %>
+<%= render :partial => "form" , :locals => {:f => f} %>
+<%end%>

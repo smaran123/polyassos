@@ -1,0 +1,6 @@
+<h1>New Lead</h1>
+<%= nested_form_for @lead, :url=> worker_leads_path(@worker),  :method => "POST" do |f| %>
+
+<%= render :partial => "form", :locals => { :f => f} %>
+<%end%>
+<%= link_to "leads",  worker_leads_path(@worker) %>

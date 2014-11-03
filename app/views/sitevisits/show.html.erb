@@ -1,0 +1,33 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h2>Site Visit Details</h2>
+
+    <div class="row-fluid">
+      <div class="span6">
+
+        <div class="row-fluid">
+          <div class="span4">LeadName :</div>
+          <div class="span4"><%=@site_visit.lead.present? ? @site_visit.lead.name : ""  %></div>
+        </div>
+        <div class="row-fluid">
+          <div class="span4">PropertyName:</div>
+          <div class="span4"><%= @site_visit.property.present? ? @site_visit.property.title : "" %></div>
+        </div>
+
+
+        <div class="row-fluid">
+          <div class="span4">InspectionDate:</div>
+          <div class="span4"><%= @site_visit.inspectiondate %></div>
+        </div>
+
+
+        <div class="row-fluid">
+          <div class="span4">Comment:</div>
+          <div class="span4"><%= @site_visit.comment%></div>
+        </div>
+
+       
+      </div>
+    </div>
+  </div>
+</div>
